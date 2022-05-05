@@ -9,5 +9,11 @@ public enum City {
     TAGANROG("Таганрог"),
     SAMARA("Самара");
 
-    City(String russianString){}
+    private String russianCity;
+    City(String russianCity){
+        this.russianCity = russianCity;
+    }
+    public String getRussianCity(){
+        return russianCity;
+    }
 }

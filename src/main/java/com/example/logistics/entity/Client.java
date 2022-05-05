@@ -1,11 +1,12 @@
 package com.example.logistics.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,11 +15,13 @@ import javax.persistence.*;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String surname;
     private String name;
     private String patronymic;
     private String phone;
     private String address;
+    @Enumerated(EnumType.STRING)
+    private City city ;
 
 }

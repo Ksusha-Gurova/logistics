@@ -1,12 +1,14 @@
 package com.example.logistics.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,12 +17,12 @@ import java.util.Date;
 public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "size")
     private SizeBox size;
-    private double weight;
+    private Double weight;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -46,7 +48,7 @@ public class Package {
     @JoinColumn(name = "courier_id")
     private Courier courierId;
 
-    private Date dateOfReceipt;
-    private Date dateOfIssue;
+    private LocalDate dateOfReceipt;
+    private LocalDate dateOfIssue;
 
 }
