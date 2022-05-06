@@ -1,10 +1,9 @@
 package com.example.logistics.service.office;
 
 import com.example.logistics.dto.office.OfficeRequestDto;
-import com.example.logistics.entity.Office;
+import com.example.logistics.model.Office;
 import com.example.logistics.mappers.office.OfficeMapper;
 import com.example.logistics.repository.OfficeRepository;
-import com.example.logistics.service.office.OfficeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +18,18 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public List<Office> findAll() {
-        List<Office> allOffices = officeRepository.findAll();
-        return allOffices;
+        return officeRepository.findAll();
     }
 
     @Override
     public Office findOffice(Long id) {
         Optional<Office> optionalOffice = officeRepository.findById(id);
-        return optionalOffice.get();
+        return optionalOffice.orElse(null);
     }
 
     @Override
     public Office updateOffice(OfficeRequestDto dto) {
-        Office office = officeRepository.getById(dto.getId());
+        Office office = officeRepository.findById(dto.getId()).orElse(null);
         if (office != null){
             return officeRepository.save(mapper.updateEntityFromDto(dto, office));
         } else return saveNewOffice(dto);

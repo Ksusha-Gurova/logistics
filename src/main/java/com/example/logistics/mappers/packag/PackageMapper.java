@@ -1,10 +1,10 @@
 package com.example.logistics.mappers.packag;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
-import com.example.logistics.entity.Client;
-import com.example.logistics.entity.Courier;
-import com.example.logistics.entity.Office;
-import com.example.logistics.entity.Package;
+import com.example.logistics.model.Client;
+import com.example.logistics.model.Courier;
+import com.example.logistics.model.Office;
+import com.example.logistics.model.Package;
 
 public interface PackageMapper {
     Package mapDtoToEntity(

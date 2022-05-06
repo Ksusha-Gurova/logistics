@@ -1,7 +1,7 @@
 package com.example.logistics.controller;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
-import com.example.logistics.entity.Package;
+import com.example.logistics.model.Package;
 import com.example.logistics.service.packag.PackageService;
 import org.springframework.web.bind.annotation.*;
 

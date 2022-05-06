@@ -1,7 +1,7 @@
 package com.example.logistics.mappers.office;
 
 import com.example.logistics.dto.office.OfficeRequestDto;
-import com.example.logistics.entity.Office;
+import com.example.logistics.model.Office;
 
 public interface OfficeMapper {
     Office mapDtoToEntity(OfficeRequestDto dto);

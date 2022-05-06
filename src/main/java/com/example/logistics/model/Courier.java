@@ -1,4 +1,4 @@
-package com.example.logistics.entity;
+package com.example.logistics.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,12 +12,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "office")
-public class Office {
+@Table(name = "courier")
+public class Courier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String address;
+    private String surname;
+    private String name;
+    private String patronymic;
     private String phone;
 
     @Enumerated(EnumType.STRING)

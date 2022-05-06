@@ -2,7 +2,7 @@ package com.example.logistics.controller;
 
 
 import com.example.logistics.dto.office.OfficeRequestDto;
-import com.example.logistics.entity.Office;
+import com.example.logistics.model.Office;
 import com.example.logistics.service.office.OfficeService;
 import org.springframework.web.bind.annotation.*;
 

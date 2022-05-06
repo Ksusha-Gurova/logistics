@@ -1,7 +1,7 @@
 package com.example.logistics.service.courier;
 
 import com.example.logistics.dto.courier.CourierRequestDto;
-import com.example.logistics.entity.Courier;
+import com.example.logistics.model.Courier;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.logistics.controller;
 
 import com.example.logistics.dto.client.ClientRequestDto;
-import com.example.logistics.entity.Client;
+import com.example.logistics.model.Client;
 import com.example.logistics.service.client.ClientService;
 import org.springframework.web.bind.annotation.*;
 

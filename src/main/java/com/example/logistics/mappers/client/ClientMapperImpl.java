@@ -1,8 +1,8 @@
 package com.example.logistics.mappers.client;
 
 import com.example.logistics.dto.client.ClientRequestDto;
-import com.example.logistics.entity.City;
-import com.example.logistics.entity.Client;
+import com.example.logistics.model.City;
+import com.example.logistics.model.Client;
 import org.springframework.stereotype.Component;
 
 @Component

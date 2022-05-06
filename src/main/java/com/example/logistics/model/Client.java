@@ -1,4 +1,4 @@
-package com.example.logistics.entity;
+package com.example.logistics.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,14 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "courier")
-public class Courier {
+@Table(name = "client")
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,8 +20,8 @@ public class Courier {
     private String name;
     private String patronymic;
     private String phone;
-
+    private String address;
     @Enumerated(EnumType.STRING)
-    @Column(name = "city")
-    private City city;
+    private City city ;
+
 }

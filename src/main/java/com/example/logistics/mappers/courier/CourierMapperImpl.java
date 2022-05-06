@@ -1,8 +1,8 @@
 package com.example.logistics.mappers.courier;
 
 import com.example.logistics.dto.courier.CourierRequestDto;
-import com.example.logistics.entity.City;
-import com.example.logistics.entity.Courier;
+import com.example.logistics.model.City;
+import com.example.logistics.model.Courier;
 import org.springframework.stereotype.Component;
 
 @Component

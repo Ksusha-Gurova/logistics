@@ -1,7 +1,7 @@
 package com.example.logistics.service.office;
 
 import com.example.logistics.dto.office.OfficeRequestDto;
-import com.example.logistics.entity.Office;
+import com.example.logistics.model.Office;
 
 import java.util.List;
 

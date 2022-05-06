@@ -1,9 +1,8 @@
 package com.example.logistics.mappers.packag;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
-import com.example.logistics.entity.*;
-import com.example.logistics.entity.Package;
-import com.example.logistics.mappers.packag.PackageMapper;
+import com.example.logistics.model.*;
+import com.example.logistics.model.Package;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package com.example.logistics.entity;
+package com.example.logistics.model;
 
 public enum Status {
     ACCEPTED("Принят пунктом приема для дальнейшей транспортировки"),

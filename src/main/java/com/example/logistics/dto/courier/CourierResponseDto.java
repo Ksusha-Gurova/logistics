@@ -1,6 +1,5 @@
 package com.example.logistics.dto.courier;
 
-import com.example.logistics.entity.City;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -1,10 +1,9 @@
 package com.example.logistics.service.client;
 
 import com.example.logistics.dto.client.ClientRequestDto;
-import com.example.logistics.entity.Client;
+import com.example.logistics.model.Client;
 import com.example.logistics.mappers.client.ClientMapper;
 import com.example.logistics.repository.ClientRepository;
-import com.example.logistics.service.client.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +18,18 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> findAll() {
-        List<Client> allClient = clientRepository.findAll();
-        return allClient;
+        return clientRepository.findAll();
     }
 
     @Override
     public Client findClient(Long id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
-        return optionalClient.get();
+        return optionalClient.orElse(null);
     }
 
     @Override
     public Client updateClient(ClientRequestDto clientDto) {
-        Client client = clientRepository.getById(clientDto.getId());
+        Client client = clientRepository.findById(clientDto.getId()).orElse(null);
         if (client != null){
             return clientRepository.save(mapper.updateEntityFromDto(clientDto, client));
         } else return saveNewClient(clientDto);
