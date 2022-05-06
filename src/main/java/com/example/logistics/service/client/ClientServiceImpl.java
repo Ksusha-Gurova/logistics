@@ -1,6 +1,7 @@
 package com.example.logistics.service.client;
 
 import com.example.logistics.dto.client.ClientRequestDto;
+import com.example.logistics.dto.client.ClientResponseDto;
 import com.example.logistics.model.Client;
 import com.example.logistics.mappers.client.ClientMapper;
 import com.example.logistics.repository.ClientRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -17,27 +19,29 @@ public class ClientServiceImpl implements ClientService {
     private final ClientMapper mapper;
 
     @Override
-    public List<Client> findAll() {
-        return clientRepository.findAll();
+    public List<ClientResponseDto> findAll() {
+        return clientRepository.findAll().stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 
     @Override
-    public Client findClient(Long id) {
+    public ClientResponseDto findClient(Long id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
-        return optionalClient.orElse(null);
+        return optionalClient.map(mapper::mapEntityToDto).orElse(null);
     }
 
     @Override
-    public Client updateClient(ClientRequestDto clientDto) {
+    public ClientResponseDto updateClient(ClientRequestDto clientDto) {
         Client client = clientRepository.findById(clientDto.getId()).orElse(null);
         if (client != null){
-            return clientRepository.save(mapper.updateEntityFromDto(clientDto, client));
+            Client updatedClient = clientRepository.save(mapper.updateEntityFromDto(clientDto, client));
+            return mapper.mapEntityToDto(updatedClient);
         } else return saveNewClient(clientDto);
     }
 
     @Override
-    public Client saveNewClient(ClientRequestDto dto) {
-        return clientRepository.save(mapper.mapDtoToEntity(dto));
+    public ClientResponseDto saveNewClient(ClientRequestDto dto) {
+        Client newClient = clientRepository.save(mapper.mapDtoToEntity(dto));
+        return mapper.mapEntityToDto(newClient);
     }
 
     @Override

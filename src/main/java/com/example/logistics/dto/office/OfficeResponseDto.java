@@ -1,8 +1,10 @@
 package com.example.logistics.dto.office;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 @AllArgsConstructor
 public class OfficeResponseDto {

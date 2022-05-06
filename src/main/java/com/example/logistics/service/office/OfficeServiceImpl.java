@@ -1,6 +1,7 @@
 package com.example.logistics.service.office;
 
 import com.example.logistics.dto.office.OfficeRequestDto;
+import com.example.logistics.dto.office.OfficeResponseDto;
 import com.example.logistics.model.Office;
 import com.example.logistics.mappers.office.OfficeMapper;
 import com.example.logistics.repository.OfficeRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -17,27 +19,29 @@ public class OfficeServiceImpl implements OfficeService {
     private  final OfficeMapper mapper;
 
     @Override
-    public List<Office> findAll() {
-        return officeRepository.findAll();
+    public List<OfficeResponseDto> findAll() {
+        return officeRepository.findAll().stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 
     @Override
-    public Office findOffice(Long id) {
+    public OfficeResponseDto findOffice(Long id) {
         Optional<Office> optionalOffice = officeRepository.findById(id);
-        return optionalOffice.orElse(null);
+        return optionalOffice.map(mapper::mapEntityToDto).orElse(null);
     }
 
     @Override
-    public Office updateOffice(OfficeRequestDto dto) {
+    public OfficeResponseDto updateOffice(OfficeRequestDto dto) {
         Office office = officeRepository.findById(dto.getId()).orElse(null);
         if (office != null){
-            return officeRepository.save(mapper.updateEntityFromDto(dto, office));
+            Office updatedOffice = officeRepository.save(mapper.updateEntityFromDto(dto, office));
+            return mapper.mapEntityToDto(updatedOffice);
         } else return saveNewOffice(dto);
     }
 
     @Override
-    public Office saveNewOffice(OfficeRequestDto dto) {
-        return officeRepository.save(mapper.mapDtoToEntity(dto));
+    public OfficeResponseDto saveNewOffice(OfficeRequestDto dto) {
+        Office newOffice = officeRepository.save(mapper.mapDtoToEntity(dto));
+        return mapper.mapEntityToDto(newOffice);
     }
 
     @Override

@@ -1,18 +1,19 @@
 package com.example.logistics.service.packag;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
+import com.example.logistics.dto.packag.PackageResponseDto;
 import com.example.logistics.model.Package;
 
 import java.util.List;
 
 public interface PackageService {
-    List<Package> findAll();
+    List<PackageResponseDto> findAll();
 
-    Package findPackage(Long id);
+    PackageResponseDto findPackage(Long id);
 
-    Package updatePackage(PackageRequestDto pac);
+    PackageResponseDto updatePackage(PackageRequestDto pac);
 
-    Package saveNewPackage(PackageRequestDto pac);
+    PackageResponseDto saveNewPackage(PackageRequestDto pac);
 
     void deletePackage(Long id);
 }

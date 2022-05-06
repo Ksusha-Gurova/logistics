@@ -2,6 +2,7 @@ package com.example.logistics.controller;
 
 
 import com.example.logistics.dto.office.OfficeRequestDto;
+import com.example.logistics.dto.office.OfficeResponseDto;
 import com.example.logistics.model.Office;
 import com.example.logistics.service.office.OfficeService;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +19,22 @@ public class OfficeController {
     }
 
     @GetMapping
-    public List<Office> findAllOffices (){
+    public List<OfficeResponseDto> findAllOffices (){
         return officeService.findAll();
     }
+
     @GetMapping("/{id}")
-    public Office findOffice (@PathVariable Long id){
+    public OfficeResponseDto findOffice (@PathVariable Long id){
         return officeService.findOffice(id);
     }
 
     @PutMapping("/{id}")
-    public Office updateOffice (@RequestBody OfficeRequestDto dto){
+    public OfficeResponseDto updateOffice (@RequestBody OfficeRequestDto dto){
         return officeService.updateOffice(dto);
     }
 
     @PostMapping
-    public Office saveNewOffice (@RequestBody OfficeRequestDto dto){
+    public OfficeResponseDto saveNewOffice (@RequestBody OfficeRequestDto dto){
         return officeService.saveNewOffice(dto);
     }
 

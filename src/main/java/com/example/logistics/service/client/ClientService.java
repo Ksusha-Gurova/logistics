@@ -1,18 +1,19 @@
 package com.example.logistics.service.client;
 
 import com.example.logistics.dto.client.ClientRequestDto;
+import com.example.logistics.dto.client.ClientResponseDto;
 import com.example.logistics.model.Client;
 
 import java.util.List;
 
 public interface ClientService {
-    List<Client> findAll();
+    List<ClientResponseDto> findAll();
 
-    Client findClient(Long id);
+    ClientResponseDto findClient(Long id);
 
-    Client updateClient(ClientRequestDto dto);
+    ClientResponseDto updateClient(ClientRequestDto dto);
 
-    Client saveNewClient(ClientRequestDto dto);
+    ClientResponseDto saveNewClient(ClientRequestDto dto);
 
     void deleteClient(Long id);
 }

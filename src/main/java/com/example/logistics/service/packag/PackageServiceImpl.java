@@ -1,6 +1,7 @@
 package com.example.logistics.service.packag;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
+import com.example.logistics.dto.packag.PackageResponseDto;
 import com.example.logistics.model.*;
 import com.example.logistics.model.Package;
 import com.example.logistics.mappers.packag.PackageMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -25,26 +27,19 @@ public class PackageServiceImpl implements PackageService {
 
 
     @Override
-    public List<Package> findAll() {
-        return packageRepository.findAll();
+    public List<PackageResponseDto> findAll() {
+        return packageRepository.findAll().stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 
     @Override
-    public Package findPackage(Long id) {
+    public PackageResponseDto findPackage(Long id) {
         Optional<Package> optionalPackage = packageRepository.findById(id);
-        return optionalPackage.orElse(null);
+        return optionalPackage.map(mapper::mapEntityToDto).orElse(null);
     }
 
     @Override
-    public Package updatePackage(PackageRequestDto pacDto) {
+    public PackageResponseDto updatePackage(PackageRequestDto pacDto) {
         Package pac = packageRepository.findById(pacDto.getId()).orElse(null);
-
-//        Package aPackage1 = packageRepository.findById(pacDto.getId())
-//                .map(aPackage -> {
-//                    //найти все связынные сущьности (клиент и тд)
-//                    mapper.updateEntityFromDto(передать все аргументы)
-//                })
-//                .orElse(saveNewPackage(pacDto));
 
         if (pac != null) {
             Client toClient = null;
@@ -63,18 +58,19 @@ public class PackageServiceImpl implements PackageService {
             // В трех следующих строках происходи тоже, что и в методе saveNewPackage в блоке if() под курьером.
             // Это альтернативный вариант
             Courier courier = Optional.ofNullable(pacDto.getCourierId()).map(courierRepository::getById).orElse(null);
-            return packageRepository.save(mapper.updateEntityFromDto(
+            Package updatedpackage = packageRepository.save(mapper.updateEntityFromDto(
                     pac,
                     pacDto,
                     toOffice, fromOffice,
                     toClient, fromClient,
                     courier));
+            return mapper.mapEntityToDto(updatedpackage);
         } else return saveNewPackage(pacDto);
 
     }
 
     @Override
-    public Package saveNewPackage(PackageRequestDto pacDto) {
+    public PackageResponseDto saveNewPackage(PackageRequestDto pacDto) {
         Client toClient = null;
         if (pacDto.getToClientId() != null) toClient = clientRepository.findById(pacDto.getToClientId()).orElse(null);
 
@@ -90,11 +86,12 @@ public class PackageServiceImpl implements PackageService {
         Courier courier = null;
         if (pacDto.getCourierId() != null) courier = courierRepository.findById(pacDto.getCourierId()).orElse(null);
 
-        return packageRepository.save(mapper.mapDtoToEntity(
+        Package newPackage = packageRepository.save(mapper.mapDtoToEntity(
                 pacDto,
                 toOffice, fromOffice,
                 toClient, fromClient,
                 courier));
+        return mapper.mapEntityToDto(newPackage);
     }
 
     @Override

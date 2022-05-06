@@ -1,18 +1,19 @@
 package com.example.logistics.service.office;
 
 import com.example.logistics.dto.office.OfficeRequestDto;
+import com.example.logistics.dto.office.OfficeResponseDto;
 import com.example.logistics.model.Office;
 
 import java.util.List;
 
 public interface OfficeService {
-    List<Office> findAll();
+    List<OfficeResponseDto> findAll();
 
-    Office findOffice(Long id);
+    OfficeResponseDto findOffice(Long id);
 
-    Office updateOffice(OfficeRequestDto dto);
+    OfficeResponseDto updateOffice(OfficeRequestDto dto);
 
-    Office saveNewOffice(OfficeRequestDto dto);
+    OfficeResponseDto saveNewOffice(OfficeRequestDto dto);
 
     void deleteOffice(Long id);
 }

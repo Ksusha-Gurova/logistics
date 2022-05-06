@@ -1,6 +1,8 @@
 package com.example.logistics.mappers.courier;
 
+import com.example.logistics.dto.client.ClientResponseDto;
 import com.example.logistics.dto.courier.CourierRequestDto;
+import com.example.logistics.dto.courier.CourierResponseDto;
 import com.example.logistics.model.City;
 import com.example.logistics.model.Courier;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,7 @@ public class CourierMapperImpl implements CourierMapper{
     @Override
     public Courier mapDtoToEntity(CourierRequestDto dto) {
         return Courier.builder()
+                .id(dto.getId())
                 .surname(dto.getSurname())
                 .name(dto.getName())
                 .patronymic(dto.getPatronymic())
@@ -26,5 +29,17 @@ public class CourierMapperImpl implements CourierMapper{
         courier.setPhone(dto.getPhone());
         courier.setCity(City.valueOf(dto.getCity()));
         return courier;
+    }
+
+    @Override
+    public CourierResponseDto mapEntityToDto(Courier courier) {
+        return CourierResponseDto.builder()
+                .id(courier.getId())
+                .surname(courier.getSurname())
+                .name(courier.getName())
+                .patronymic(courier.getPatronymic())
+                .phone(courier.getPhone())
+                .city(courier.getCity().getTranslation())
+                .build();
     }
 }

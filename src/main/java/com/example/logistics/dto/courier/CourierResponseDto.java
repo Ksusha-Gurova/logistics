@@ -1,8 +1,10 @@
 package com.example.logistics.dto.courier;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 @AllArgsConstructor
 public class CourierResponseDto {

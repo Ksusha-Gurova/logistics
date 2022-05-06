@@ -1,6 +1,7 @@
 package com.example.logistics.controller;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
+import com.example.logistics.dto.packag.PackageResponseDto;
 import com.example.logistics.model.Package;
 import com.example.logistics.service.packag.PackageService;
 import org.springframework.web.bind.annotation.*;
@@ -17,22 +18,22 @@ public class PackageController {
     }
 
     @GetMapping
-    public List<Package> findAllPackages (){
+    public List<PackageResponseDto> findAllPackages (){
         return packageService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Package findPackage (@PathVariable Long id){
+    public PackageResponseDto findPackage (@PathVariable Long id){
         return packageService.findPackage(id);
     }
 
     @PutMapping("/{id}")
-    public Package updatePackage (@RequestBody PackageRequestDto pac){
+    public PackageResponseDto updatePackage (@RequestBody PackageRequestDto pac){
         return packageService.updatePackage(pac);
     }
 
     @PostMapping
-    public Package saveNewPackage (@RequestBody PackageRequestDto pac){
+    public PackageResponseDto saveNewPackage (@RequestBody PackageRequestDto pac){
         return packageService.saveNewPackage(pac);
     }
 

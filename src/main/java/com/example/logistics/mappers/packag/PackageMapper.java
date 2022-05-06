@@ -1,6 +1,7 @@
 package com.example.logistics.mappers.packag;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
+import com.example.logistics.dto.packag.PackageResponseDto;
 import com.example.logistics.model.Client;
 import com.example.logistics.model.Courier;
 import com.example.logistics.model.Office;
@@ -23,4 +24,6 @@ public interface PackageMapper {
             Client toClient,
             Client fromClient,
             Courier courier);
+
+    PackageResponseDto mapEntityToDto(Package pac);
 }

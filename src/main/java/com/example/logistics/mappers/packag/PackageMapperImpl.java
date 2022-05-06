@@ -1,9 +1,12 @@
 package com.example.logistics.mappers.packag;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
+import com.example.logistics.dto.packag.PackageResponseDto;
 import com.example.logistics.model.*;
 import com.example.logistics.model.Package;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class PackageMapperImpl implements PackageMapper {
@@ -16,6 +19,7 @@ public class PackageMapperImpl implements PackageMapper {
             Client fromClient,
             Courier courier) {
         return Package.builder()
+                .id(dto.getId())
                 .size(SizeBox.valueOf(dto.getSize()))
                 .weight(dto.getWeight())
                 .status(Status.valueOf(dto.getStatus()))
@@ -50,25 +54,21 @@ public class PackageMapperImpl implements PackageMapper {
 
         return pac;
     }
+
+    @Override
+    public PackageResponseDto mapEntityToDto(Package pac) {
+        return PackageResponseDto.builder()
+                .id(pac.getId())
+                .size(pac.getSize().toString())
+                .weight(pac.getWeight())
+                .status(pac.getStatus().getMessage())
+                .fromClientId(pac.getFromClientId().getId())
+                .toClientId(pac.getToClientId().getId())
+                .fromOfficeId(pac.getFromOfficeId().getId())
+                .toOfficeId(pac.getToOfficeId().getId())
+                .courierId(Optional.ofNullable(pac.getCourierId()).map(Courier::getId).orElse(null))
+                .dateOfReceipt(pac.getDateOfReceipt())
+                .dateOfIssue(pac.getDateOfIssue())
+                .build();
+    }
 }
-//        Client toClient = clientRepository.getById(pac.getToClientId());
-//        Client fromClient = clientRepository.getById(pac.getFromClientId());
-//        Office toOffice = officeRepository.getById(pac.getToOfficeId());
-//        Office fromOffice = officeRepository.getById(pac.getFromOfficeId());
-//        Courier courier = courierRepository.getById(pac.getCourierId());
-//        SizeBox size = SizeBox.valueOf(pac.getSize());
-//        Status status = Status.valueOf(pac.getStatus());
-//
-//        Package pack = Package.builder()
-//                .id(null)
-//                .size(size)
-//                .weight(pac.getWeight())
-//                .status(status)
-//                .fromClientId(fromClient)
-//                .toClientId(toClient)
-//                .fromOfficeId(fromOffice)
-//                .toOfficeId(toOffice)
-//                .courierId(courier)
-//                .dateOfReceipt(pac.getDateOfReceipt())
-//                .dateOfIssue(pac.getDateOfIssue())
-//                .build();

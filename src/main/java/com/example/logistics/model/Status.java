@@ -5,5 +5,14 @@ public enum Status {
     DELIVERY("Передан для транспортировки (в пути)"),
     COMPLETED("Выдан получателю");
 
-    Status(String message){}
+    private final String message;
+
+    Status(String message){
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
+

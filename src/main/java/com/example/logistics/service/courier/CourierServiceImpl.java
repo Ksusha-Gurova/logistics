@@ -1,6 +1,7 @@
 package com.example.logistics.service.courier;
 
 import com.example.logistics.dto.courier.CourierRequestDto;
+import com.example.logistics.dto.courier.CourierResponseDto;
 import com.example.logistics.model.Courier;
 import com.example.logistics.mappers.courier.CourierMapper;
 import com.example.logistics.repository.CourierRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -17,27 +19,29 @@ public class CourierServiceImpl implements CourierService {
     private final CourierMapper mapper;
 
     @Override
-    public List<Courier> findAll() {
-        return courierRepository.findAll();
+    public List<CourierResponseDto> findAll() {
+        return courierRepository.findAll().stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 
     @Override
-    public Courier findCourier(Long id) {
+    public CourierResponseDto findCourier(Long id) {
         Optional<Courier> optionalCourier = courierRepository.findById(id);
-        return optionalCourier.orElse(null);
+        return optionalCourier.map(mapper::mapEntityToDto).orElse(null);
     }
 
     @Override
-    public Courier updateCourier(CourierRequestDto dto) {
+    public CourierResponseDto updateCourier(CourierRequestDto dto) {
         Courier courier = courierRepository.findById(dto.getId()).orElse(null);
         if (courier != null){
-            return courierRepository.save(mapper.updateEntityFromDto(dto, courier));
+            Courier updatedCourier = courierRepository.save(mapper.updateEntityFromDto(dto, courier));
+            return mapper.mapEntityToDto(updatedCourier);
         } else return saveNewCourier(dto);
     }
 
     @Override
-    public Courier saveNewCourier(CourierRequestDto dto) {
-        return courierRepository.save(mapper.mapDtoToEntity(dto));
+    public CourierResponseDto saveNewCourier(CourierRequestDto dto) {
+        Courier newCourier = courierRepository.save(mapper.mapDtoToEntity(dto));
+        return mapper.mapEntityToDto(newCourier);
     }
 
     @Override

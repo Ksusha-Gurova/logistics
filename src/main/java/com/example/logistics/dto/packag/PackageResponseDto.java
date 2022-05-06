@@ -1,10 +1,12 @@
 package com.example.logistics.dto.packag;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 
+@Builder
 @Data
 @AllArgsConstructor
 public class PackageResponseDto {
