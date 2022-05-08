@@ -30,23 +30,23 @@ public class Package {
 
     @ManyToOne
     @JoinColumn(name = "from_client_id")
-    private Client fromClientId;
+    private Client fromClient;
 
     @ManyToOne
     @JoinColumn(name = "to_client_id")
-    private Client toClientId;
+    private Client toClient;
 
     @ManyToOne
     @JoinColumn(name = "from_office_id")
-    private Office fromOfficeId;
+    private Office fromOffice;
 
     @ManyToOne
     @JoinColumn(name = "to_office_id")
-    private Office toOfficeId;
+    private Office toOffice;
 
     @ManyToOne
     @JoinColumn(name = "courier_id")
-    private Courier courierId;
+    private Courier courier;
 
     private LocalDate dateOfReceipt;
     private LocalDate dateOfIssue;

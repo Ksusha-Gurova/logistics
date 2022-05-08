@@ -1,6 +1,6 @@
-package com.example.logistics.controller;
+package com.example.logistics.api;
 
-import com.example.logistics.dto.ErrorMessage;
+import com.example.logistics.api.dto.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

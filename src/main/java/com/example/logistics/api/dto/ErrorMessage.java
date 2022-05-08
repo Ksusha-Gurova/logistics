@@ -1,4 +1,4 @@
-package com.example.logistics.dto;
+package com.example.logistics.api.dto;
 
 import lombok.Builder;
 import lombok.Data;

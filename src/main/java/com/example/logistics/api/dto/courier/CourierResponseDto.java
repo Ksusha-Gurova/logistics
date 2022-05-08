@@ -1,4 +1,4 @@
-package com.example.logistics.dto.courier;
+package com.example.logistics.api.dto.courier;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

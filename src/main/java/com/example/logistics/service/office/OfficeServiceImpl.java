@@ -1,7 +1,8 @@
 package com.example.logistics.service.office;
 
-import com.example.logistics.dto.office.OfficeRequestDto;
-import com.example.logistics.dto.office.OfficeResponseDto;
+import com.example.logistics.api.dto.office.OfficeRequestDto;
+import com.example.logistics.api.dto.office.OfficeResponseDto;
+import com.example.logistics.model.City;
 import com.example.logistics.model.Office;
 import com.example.logistics.mappers.office.OfficeMapper;
 import com.example.logistics.repository.OfficeRepository;
@@ -45,5 +46,10 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public void deleteOffice(Long id) {
         officeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<OfficeResponseDto> findOfficesByCity(String city) {
+        return officeRepository.findAllByCity(City.valueOf(city)).stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 }

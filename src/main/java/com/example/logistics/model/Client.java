@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -21,7 +22,10 @@ public class Client {
     private String patronymic;
     private String phone;
     private String address;
+
     @Enumerated(EnumType.STRING)
     private City city ;
+
+
 
 }

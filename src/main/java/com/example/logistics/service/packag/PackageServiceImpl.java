@@ -1,7 +1,7 @@
 package com.example.logistics.service.packag;
 
-import com.example.logistics.dto.packag.PackageRequestDto;
-import com.example.logistics.dto.packag.PackageResponseDto;
+import com.example.logistics.api.dto.packag.PackageRequestDto;
+import com.example.logistics.api.dto.packag.PackageResponseDto;
 import com.example.logistics.model.*;
 import com.example.logistics.model.Package;
 import com.example.logistics.mappers.packag.PackageMapper;
@@ -68,5 +68,36 @@ public class PackageServiceImpl implements PackageService {
     @Override
     public void deletePackage(Long id) {
         packageRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PackageResponseDto> findAllPackagesFromClient(Long id) {
+        return packageRepository.findAllByFromClient_Id(id).stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<PackageResponseDto> findAllPackagesToClient(Long id) {
+        return packageRepository.findAllByToClient_Id(id).stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PackageResponseDto> findPackagesFromOffice(Long id) {
+        return packageRepository.findAllByFromOffice_Id(id).stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PackageResponseDto> findPackagesToOffice(Long id) {
+        return packageRepository.findAllByToOffice_Id(id).stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PackageResponseDto> findPackagesByStatus(String status) {
+        return packageRepository.findAllByStatus(Status.valueOf(status)).stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PackageResponseDto> findPackagesByCourier(Long courierID) {
+        return packageRepository.findAllByCourier_Id(courierID).stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 }

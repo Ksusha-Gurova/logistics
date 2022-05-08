@@ -1,4 +1,4 @@
-package com.example.logistics.dto.client;
+package com.example.logistics.api.dto.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

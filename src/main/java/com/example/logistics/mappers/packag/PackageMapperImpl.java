@@ -1,7 +1,7 @@
 package com.example.logistics.mappers.packag;
 
-import com.example.logistics.dto.packag.PackageRequestDto;
-import com.example.logistics.dto.packag.PackageResponseDto;
+import com.example.logistics.api.dto.packag.PackageRequestDto;
+import com.example.logistics.api.dto.packag.PackageResponseDto;
 import com.example.logistics.model.*;
 import com.example.logistics.model.Package;
 import org.springframework.stereotype.Component;
@@ -23,11 +23,11 @@ public class PackageMapperImpl implements PackageMapper {
                 .size(SizeBox.valueOf(dto.getSize()))
                 .weight(dto.getWeight())
                 .status(Status.valueOf(dto.getStatus()))
-                .fromClientId(fromClient)
-                .toClientId(toClient)
-                .fromOfficeId(fromOffice)
-                .toOfficeId(toOffice)
-                .courierId(courier)
+                .fromClient(fromClient)
+                .toClient(toClient)
+                .fromOffice(fromOffice)
+                .toOffice(toOffice)
+                .courier(courier)
                 .dateOfReceipt(dto.getDateOfReceipt())
                 .dateOfIssue(dto.getDateOfIssue())
                 .build();
@@ -45,11 +45,11 @@ public class PackageMapperImpl implements PackageMapper {
         pac.setSize(SizeBox.valueOf(dto.getSize()));
         pac.setWeight(dto.getWeight());
         pac.setStatus(Status.valueOf(dto.getStatus()));
-        pac.setFromClientId(fromClient);
-        pac.setToClientId(toClient);
-        pac.setFromOfficeId(fromOffice);
-        pac.setToOfficeId(toOffice);
-        pac.setCourierId(courier);
+        pac.setFromClient(fromClient);
+        pac.setToClient(toClient);
+        pac.setFromOffice(fromOffice);
+        pac.setToOffice(toOffice);
+        pac.setCourier(courier);
         pac.setDateOfIssue(dto.getDateOfIssue());
 
         return pac;
@@ -62,11 +62,11 @@ public class PackageMapperImpl implements PackageMapper {
                 .size(pac.getSize().toString())
                 .weight(pac.getWeight())
                 .status(pac.getStatus().getMessage())
-                .fromClientId(pac.getFromClientId().getId())
-                .toClientId(pac.getToClientId().getId())
-                .fromOfficeId(pac.getFromOfficeId().getId())
-                .toOfficeId(pac.getToOfficeId().getId())
-                .courierId(Optional.ofNullable(pac.getCourierId()).map(Courier::getId).orElse(null))
+                .fromClientId(pac.getFromClient().getId())
+                .toClientId(pac.getToClient().getId())
+                .fromOfficeId(pac.getFromOffice().getId())
+                .toOfficeId(pac.getToOffice().getId())
+                .courierId(Optional.ofNullable(pac.getCourier()).map(Courier::getId).orElse(null))
                 .dateOfReceipt(pac.getDateOfReceipt())
                 .dateOfIssue(pac.getDateOfIssue())
                 .build();

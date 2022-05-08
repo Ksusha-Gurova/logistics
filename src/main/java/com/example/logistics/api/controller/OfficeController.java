@@ -1,8 +1,8 @@
-package com.example.logistics.controller;
+package com.example.logistics.api.controller;
 
 
-import com.example.logistics.dto.office.OfficeRequestDto;
-import com.example.logistics.dto.office.OfficeResponseDto;
+import com.example.logistics.api.dto.office.OfficeRequestDto;
+import com.example.logistics.api.dto.office.OfficeResponseDto;
 import com.example.logistics.service.office.OfficeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +35,10 @@ public class OfficeController {
     @DeleteMapping("{id}")
     public void deleteOffice (@PathVariable Long id){
         officeService.deleteOffice(id);
+    }
+
+    @GetMapping("/by_city")
+    public List<OfficeResponseDto> findOfficesByCity(String city){
+        return officeService.findOfficesByCity(city);
     }
 }
