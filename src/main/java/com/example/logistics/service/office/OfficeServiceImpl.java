@@ -8,6 +8,7 @@ import com.example.logistics.repository.OfficeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,18 +31,15 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public OfficeResponseDto updateOffice(OfficeRequestDto dto) {
-        Office office = officeRepository.findById(dto.getId()).orElse(null);
-        if (office != null){
-            Office updatedOffice = officeRepository.save(mapper.updateEntityFromDto(dto, office));
-            return mapper.mapEntityToDto(updatedOffice);
-        } else return saveNewOffice(dto);
-    }
+    public OfficeResponseDto saveOrUpdateOffice(OfficeRequestDto dto) {
+        Office updatedOrSaveOffice = Optional.ofNullable(dto.getId())
+                .map(officeId -> officeRepository.findById(officeId)
+                        .map(client -> mapper.updateEntityFromDto(dto, client))
+                        .orElseThrow(() -> new EntityNotFoundException("Не существует в базе клиента с id = " + dto.getId())))
+                .orElse(mapper.mapDtoToEntity(dto));
+        updatedOrSaveOffice = officeRepository.save(updatedOrSaveOffice);
 
-    @Override
-    public OfficeResponseDto saveNewOffice(OfficeRequestDto dto) {
-        Office newOffice = officeRepository.save(mapper.mapDtoToEntity(dto));
-        return mapper.mapEntityToDto(newOffice);
+        return mapper.mapEntityToDto(updatedOrSaveOffice);
     }
 
     @Override

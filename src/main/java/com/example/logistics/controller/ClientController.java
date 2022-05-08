@@ -2,7 +2,6 @@ package com.example.logistics.controller;
 
 import com.example.logistics.dto.client.ClientRequestDto;
 import com.example.logistics.dto.client.ClientResponseDto;
-import com.example.logistics.model.Client;
 import com.example.logistics.service.client.ClientService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,14 +26,9 @@ public class ClientController {
         return clientService.findClient(id);
     }
 
-    @PutMapping("/{id}")
-    public ClientResponseDto updateClient (@RequestBody ClientRequestDto dto){
-        return clientService.updateClient(dto);
-    }
-
     @PostMapping
-    public ClientResponseDto saveNewClient (@RequestBody ClientRequestDto dto){
-        return clientService.saveNewClient(dto);
+    public ClientResponseDto saveOrUpdateClient (ClientRequestDto dto) {
+        return clientService.saveOrUpdatePackage(dto);
     }
 
     @DeleteMapping("/{id}")

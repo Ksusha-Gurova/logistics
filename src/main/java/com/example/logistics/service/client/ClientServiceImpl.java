@@ -8,6 +8,7 @@ import com.example.logistics.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,18 +31,15 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientResponseDto updateClient(ClientRequestDto clientDto) {
-        Client client = clientRepository.findById(clientDto.getId()).orElse(null);
-        if (client != null){
-            Client updatedClient = clientRepository.save(mapper.updateEntityFromDto(clientDto, client));
-            return mapper.mapEntityToDto(updatedClient);
-        } else return saveNewClient(clientDto);
-    }
+    public ClientResponseDto saveOrUpdatePackage(ClientRequestDto dto) {
+        Client updetedOrNewClient = Optional.ofNullable(dto.getId())
+                .map(clientId -> clientRepository.findById(clientId)
+                        .map(client -> mapper.updateEntityFromDto(dto, client))
+                        .orElseThrow(() -> new EntityNotFoundException("Не существует в базе клиента с id = " + dto.getId())))
+                .orElse(mapper.mapDtoToEntity(dto));
+        updetedOrNewClient = clientRepository.save(updetedOrNewClient);
 
-    @Override
-    public ClientResponseDto saveNewClient(ClientRequestDto dto) {
-        Client newClient = clientRepository.save(mapper.mapDtoToEntity(dto));
-        return mapper.mapEntityToDto(newClient);
+        return mapper.mapEntityToDto(updetedOrNewClient);
     }
 
     @Override

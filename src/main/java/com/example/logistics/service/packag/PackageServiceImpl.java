@@ -12,6 +12,7 @@ import com.example.logistics.repository.PackageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,60 +39,30 @@ public class PackageServiceImpl implements PackageService {
     }
 
     @Override
-    public PackageResponseDto updatePackage(PackageRequestDto pacDto) {
-        Package pac = packageRepository.findById(pacDto.getId()).orElse(null);
+    public PackageResponseDto saveOrUpdatePackage(PackageRequestDto dto) {
 
-        if (pac != null) {
-            Client toClient = null;
-            if (pacDto.getToClientId() != null) toClient = clientRepository.findById(pacDto.getToClientId()).orElse(null);
+        Optional.ofNullable(dto.getId())
+                .map(packageId -> packageRepository.findById(packageId)
+                        .orElseThrow(() -> new EntityNotFoundException("Нет такой посылки в базе с id = " + packageId)));
+        Client toClient = Optional.ofNullable(dto.getToClientId()).map(clientRepository::getById)
+                .orElseThrow(() -> new EntityNotFoundException("Нет такого клиента в базе с id = " + dto.getToClientId()));
+        Client fromClient = Optional.ofNullable(dto.getFromClientId()).map(clientRepository::getById)
+                .orElseThrow(() -> new EntityNotFoundException("Нет такого клиента в базе с id = " + dto.getToClientId()));
+        Office toOffice = Optional.ofNullable(dto.getToOfficeId()).map(officeRepository::getById)
+                .orElseThrow(() -> new EntityNotFoundException("Нет такого офиса в базе с id = " + dto.getToOfficeId()));
+        Office fromOffice = Optional.ofNullable(dto.getFromOfficeId()).map(officeRepository::getById)
+                .orElseThrow(() -> new EntityNotFoundException("Нет такого офиса в базе с id = " + dto.getFromOfficeId()));
+        Courier courier = Optional.ofNullable(dto.getCourierId()).map(courierRepository::getById)
+                .orElse(null);
 
-            Client fromClient = null;
-            if (pacDto.getFromClientId() != null) fromClient = clientRepository.findById(pacDto.getFromClientId()).orElse(null);
-
-            Office toOffice = null;
-            if (pacDto.getToOfficeId() != null) toOffice = officeRepository.findById(pacDto.getToOfficeId()).orElse(null);
-
-            Office fromOffice = null;
-            if (pacDto.getFromOfficeId() != null)
-               fromOffice = officeRepository.findById(pacDto.getFromOfficeId()).orElse(null);
-
-            // В трех следующих строках происходи тоже, что и в методе saveNewPackage в блоке if() под курьером.
-            // Это альтернативный вариант
-            Courier courier = Optional.ofNullable(pacDto.getCourierId()).map(courierRepository::getById).orElse(null);
-            Package updatedpackage = packageRepository.save(mapper.updateEntityFromDto(
-                    pac,
-                    pacDto,
-                    toOffice, fromOffice,
-                    toClient, fromClient,
-                    courier));
-            return mapper.mapEntityToDto(updatedpackage);
-        } else return saveNewPackage(pacDto);
-
-    }
-
-    @Override
-    public PackageResponseDto saveNewPackage(PackageRequestDto pacDto) {
-        Client toClient = null;
-        if (pacDto.getToClientId() != null) toClient = clientRepository.findById(pacDto.getToClientId()).orElse(null);
-
-        Client fromClient = null;
-        if (pacDto.getFromClientId() != null) fromClient = clientRepository.findById(pacDto.getFromClientId()).orElse(null);
-
-        Office toOffice = null;
-        if (pacDto.getToOfficeId() != null) toOffice = officeRepository.findById(pacDto.getToOfficeId()).orElse(null);
-
-        Office fromOffice = null;
-        if (pacDto.getFromOfficeId() != null) fromOffice = officeRepository.findById(pacDto.getFromOfficeId()).orElse(null);
-
-        Courier courier = null;
-        if (pacDto.getCourierId() != null) courier = courierRepository.findById(pacDto.getCourierId()).orElse(null);
-
-        Package newPackage = packageRepository.save(mapper.mapDtoToEntity(
-                pacDto,
-                toOffice, fromOffice,
-                toClient, fromClient,
-                courier));
-        return mapper.mapEntityToDto(newPackage);
+        Package pack = Optional.ofNullable(dto.getId())
+                .map(packageId -> {
+                    Package entityFromDataBase = packageRepository.getById(packageId);
+                    return mapper.updateEntityFromDto(entityFromDataBase, dto, toOffice, fromOffice, toClient, fromClient, courier);
+                })
+                .orElse(mapper.mapDtoToEntity(dto, toOffice, fromOffice, toClient, fromClient, courier));
+        pack = packageRepository.save(pack);
+        return mapper.mapEntityToDto(pack);
     }
 
     @Override

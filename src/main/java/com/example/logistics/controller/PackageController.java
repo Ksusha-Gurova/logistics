@@ -2,7 +2,6 @@ package com.example.logistics.controller;
 
 import com.example.logistics.dto.packag.PackageRequestDto;
 import com.example.logistics.dto.packag.PackageResponseDto;
-import com.example.logistics.model.Package;
 import com.example.logistics.service.packag.PackageService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,14 +26,9 @@ public class PackageController {
         return packageService.findPackage(id);
     }
 
-    @PutMapping("/{id}")
-    public PackageResponseDto updatePackage (@RequestBody PackageRequestDto pac){
-        return packageService.updatePackage(pac);
-    }
-
     @PostMapping
-    public PackageResponseDto saveNewPackage (@RequestBody PackageRequestDto pac){
-        return packageService.saveNewPackage(pac);
+    public PackageResponseDto saveOrUpdatePackage (@RequestBody PackageRequestDto dto){
+        return packageService.saveOrUpdatePackage(dto);
     }
 
     @DeleteMapping("{id}")

@@ -8,6 +8,7 @@ import com.example.logistics.repository.CourierRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,19 +31,17 @@ public class CourierServiceImpl implements CourierService {
     }
 
     @Override
-    public CourierResponseDto updateCourier(CourierRequestDto dto) {
-        Courier courier = courierRepository.findById(dto.getId()).orElse(null);
-        if (courier != null){
-            Courier updatedCourier = courierRepository.save(mapper.updateEntityFromDto(dto, courier));
-            return mapper.mapEntityToDto(updatedCourier);
-        } else return saveNewCourier(dto);
+    public CourierResponseDto saveOrUpdateCourier(CourierRequestDto dto) {
+        Courier updetedOrNewCourier = Optional.ofNullable(dto.getId())
+                .map(courierId -> courierRepository.findById(courierId)
+                        .map(courier -> mapper.updateEntityFromDto(dto, courier))
+                        .orElseThrow(() -> new EntityNotFoundException("Не существует в базе курьера с id = " + dto.getId())))
+                .orElse(mapper.mapDtoToEntity(dto));
+        updetedOrNewCourier = courierRepository.save(updetedOrNewCourier);
+
+        return mapper.mapEntityToDto(updetedOrNewCourier);
     }
 
-    @Override
-    public CourierResponseDto saveNewCourier(CourierRequestDto dto) {
-        Courier newCourier = courierRepository.save(mapper.mapDtoToEntity(dto));
-        return mapper.mapEntityToDto(newCourier);
-    }
 
     @Override
     public void deleteCourier(Long id) {
