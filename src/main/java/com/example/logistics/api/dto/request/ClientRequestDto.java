@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ClientRequestDto {
+
     private Long id;
     private String surname;
     private String name;

@@ -4,7 +4,7 @@ import com.example.logistics.api.dto.request.PackageRequestDto;
 import com.example.logistics.api.dto.response.PackageResponseDto;
 import com.example.logistics.model.*;
 import com.example.logistics.model.Package;
-import com.example.logistics.mappers.packag.PackageMapper;
+import com.example.logistics.mappers.PackageMapper;
 import com.example.logistics.repository.ClientRepository;
 import com.example.logistics.repository.CourierRepository;
 import com.example.logistics.repository.OfficeRepository;

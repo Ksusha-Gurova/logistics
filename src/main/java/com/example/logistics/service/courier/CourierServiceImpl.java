@@ -3,7 +3,7 @@ package com.example.logistics.service.courier;
 import com.example.logistics.api.dto.request.CourierRequestDto;
 import com.example.logistics.api.dto.response.CourierResponseDto;
 import com.example.logistics.model.Courier;
-import com.example.logistics.mappers.courier.CourierMapper;
+import com.example.logistics.mappers.CourierMapper;
 import com.example.logistics.repository.CourierRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

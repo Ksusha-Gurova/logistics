@@ -4,7 +4,7 @@ import com.example.logistics.api.dto.request.OfficeRequestDto;
 import com.example.logistics.api.dto.response.OfficeResponseDto;
 import com.example.logistics.model.City;
 import com.example.logistics.model.Office;
-import com.example.logistics.mappers.office.OfficeMapper;
+import com.example.logistics.mappers.OfficeMapper;
 import com.example.logistics.repository.OfficeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
