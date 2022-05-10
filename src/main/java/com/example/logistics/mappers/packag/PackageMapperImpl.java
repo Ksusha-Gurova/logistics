@@ -1,7 +1,7 @@
 package com.example.logistics.mappers.packag;
 
-import com.example.logistics.api.dto.packag.PackageRequestDto;
-import com.example.logistics.api.dto.packag.PackageResponseDto;
+import com.example.logistics.api.dto.request.PackageRequestDto;
+import com.example.logistics.api.dto.response.PackageResponseDto;
 import com.example.logistics.model.*;
 import com.example.logistics.model.Package;
 import org.springframework.stereotype.Component;

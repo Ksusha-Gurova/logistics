@@ -1,8 +1,8 @@
 package com.example.logistics.api.controller;
 
 
-import com.example.logistics.api.dto.office.OfficeRequestDto;
-import com.example.logistics.api.dto.office.OfficeResponseDto;
+import com.example.logistics.api.dto.request.OfficeRequestDto;
+import com.example.logistics.api.dto.response.OfficeResponseDto;
 import com.example.logistics.service.office.OfficeService;
 import org.springframework.web.bind.annotation.*;
 

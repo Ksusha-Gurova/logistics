@@ -1,4 +1,4 @@
-package com.example.logistics.api.dto.city;
+package com.example.logistics.api.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

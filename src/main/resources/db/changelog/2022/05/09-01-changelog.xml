@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1652095253902-1" author="ksu (generated)">
+        <createTable tableName="client">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_pk"/>
+            </column>
+            <column name="surname" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patronymic" type="VARCHAR"/>
+            <column name="phone" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR"/>
+            <column name="city" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1652095253902-2" author="ksu (generated)">
+        <createTable tableName="package">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="package_pk"/>
+            </column>
+            <column name="size" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="from_client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to_client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="from_office_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to_office_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="courier_id" type="BIGINT"/>
+            <column name="date_of_receipt" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_issue" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1652095253902-3" author="ksu (generated)">
+        <createTable tableName="office">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="office_pk"/>
+            </column>
+            <column name="address" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1652095253902-4" author="ksu (generated)">
+        <createTable tableName="courier">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="courier_pk"/>
+            </column>
+            <column name="surname" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patronymic" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1652095253902-5" author="ksu (generated)">
+        <createIndex indexName="user_phone_uindex" tableName="client" unique="true">
+            <column name="phone"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1652095253902-6" author="ksu (generated)">
+        <createIndex indexName="office_phone_uindex" tableName="office" unique="true">
+            <column name="phone"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1652095253902-7" author="ksu (generated)">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
+                        minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
+    </changeSet>
+    <changeSet id="1652095253902-8" author="ksu (generated)">
+        <addForeignKeyConstraint baseColumnNames="from_client_id" baseTableName="package"
+                                 constraintName="package_client_id_fk" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="client"/>
+    </changeSet>
+    <changeSet id="1652095253902-9" author="ksu (generated)">
+        <addForeignKeyConstraint baseColumnNames="to_client_id" baseTableName="package"
+                                 constraintName="package_client_id_fk_2" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="client"/>
+    </changeSet>
+    <changeSet id="1652095253902-10" author="ksu (generated)">
+        <addForeignKeyConstraint baseColumnNames="from_office_id" baseTableName="package"
+                                 constraintName="package_office_id_fk" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="office"/>
+    </changeSet>
+    <changeSet id="1652095253902-11" author="ksu (generated)">
+        <addForeignKeyConstraint baseColumnNames="to_office_id" baseTableName="package"
+                                 constraintName="package_office_id_fk_2" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="office"/>
+    </changeSet>
+
+</databaseChangeLog>

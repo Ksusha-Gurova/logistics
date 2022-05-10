@@ -1,7 +1,7 @@
 package com.example.logistics.service.client;
 
-import com.example.logistics.api.dto.client.ClientRequestDto;
-import com.example.logistics.api.dto.client.ClientResponseDto;
+import com.example.logistics.api.dto.request.ClientRequestDto;
+import com.example.logistics.api.dto.response.ClientResponseDto;
 import com.example.logistics.model.Client;
 import com.example.logistics.mappers.client.ClientMapper;
 import com.example.logistics.repository.ClientRepository;

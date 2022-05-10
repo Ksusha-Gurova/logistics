@@ -1,7 +1,7 @@
 package com.example.logistics.service.packag;
 
-import com.example.logistics.api.dto.packag.PackageRequestDto;
-import com.example.logistics.api.dto.packag.PackageResponseDto;
+import com.example.logistics.api.dto.request.PackageRequestDto;
+import com.example.logistics.api.dto.response.PackageResponseDto;
 
 import java.util.List;
 

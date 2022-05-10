@@ -1,6 +1,6 @@
 package com.example.logistics.service.city;
 
-import com.example.logistics.api.dto.city.CityResponseDto;
+import com.example.logistics.api.dto.response.CityResponseDto;
 import com.example.logistics.mappers.city.CityMapper;
 import com.example.logistics.model.City;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.example.logistics.mappers.office;
 
-import com.example.logistics.api.dto.office.OfficeRequestDto;
-import com.example.logistics.api.dto.office.OfficeResponseDto;
+import com.example.logistics.api.dto.request.OfficeRequestDto;
+import com.example.logistics.api.dto.response.OfficeResponseDto;
 import com.example.logistics.model.City;
 import com.example.logistics.model.Office;
 import org.springframework.stereotype.Component;

@@ -1,18 +1,15 @@
-package com.example.logistics.api.dto.client;
+package com.example.logistics.api.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
 @AllArgsConstructor
-public class ClientResponseDto {
+public class CourierRequestDto {
     private Long id;
     private String surname;
     private String name;
     private String patronymic;
     private String phone;
-    private String address;
-    private String city ;
+    private String city;
 }

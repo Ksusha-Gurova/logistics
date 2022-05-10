@@ -55,7 +55,13 @@
             <artifactId>springdoc-openapi-data-rest</artifactId>
             <version>1.6.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
     </dependencies>
+
+
 
     <build>
         <plugins>
@@ -69,6 +75,18 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <configuration>
+                    <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
+<!--                    <driver>${spring.datasource.driverClassName}</driver>-->
+                    <url>jdbc:postgresql://localhost:5432/postgres</url>
+                    <username>ksusha</username>
+                    <password>Sdfghjky1!</password>
                 </configuration>
             </plugin>
         </plugins>
