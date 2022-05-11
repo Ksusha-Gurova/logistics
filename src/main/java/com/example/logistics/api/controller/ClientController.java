@@ -3,10 +3,12 @@ package com.example.logistics.api.controller;
 import com.example.logistics.api.dto.request.ClientRequestDto;
 import com.example.logistics.api.dto.response.ClientResponseDto;
 import com.example.logistics.service.client.ClientService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/client")
 public class ClientController {
@@ -28,6 +30,7 @@ public class ClientController {
 
     @PostMapping
     public ClientResponseDto saveOrUpdateClient (ClientRequestDto dto) {
+        log.info("saveOrUpdateClient(), dto = {}", dto);
         return clientService.saveOrUpdatePackage(dto);
     }
 

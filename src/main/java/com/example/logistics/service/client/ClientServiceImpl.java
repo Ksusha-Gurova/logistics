@@ -6,13 +6,17 @@ import com.example.logistics.model.Client;
 import com.example.logistics.mappers.ClientMapper;
 import com.example.logistics.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -32,14 +36,26 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientResponseDto saveOrUpdatePackage(ClientRequestDto dto) {
-        Client updetedOrNewClient = Optional.ofNullable(dto.getId())
-                .map(clientId -> clientRepository.findById(clientId)
-                        .map(client -> mapper.updateEntityFromDto(dto, client))
-                        .orElseThrow(() -> new EntityNotFoundException("Не существует в базе клиента с id = " + dto.getId())))
-                .orElse(mapper.mapDtoToEntity(dto));
-        updetedOrNewClient = clientRepository.save(updetedOrNewClient);
+        log.info("saveOrUpdateClient(), dto = {}", dto);
+        try {
+            Client updatedOrNewClient = Optional.ofNullable(dto.getId())
+                    .map(clientId -> clientRepository.findById(clientId)
+                            .map(client -> mapper.updateEntityFromDto(dto, client))
+                            .orElseThrow(() -> new EntityNotFoundException("Не существует в базе клиента с id = " + dto.getId())))
+                    .orElse(mapper.mapDtoToEntity(dto));
+            updatedOrNewClient = clientRepository.save(updatedOrNewClient);
+            log.info("saveOrUpdatePackage(), в базу сохранен Client, updatedOrNewClient = {}", updatedOrNewClient);
 
-        return mapper.mapEntityToDto(updetedOrNewClient);
+
+            ClientResponseDto clientResponseDto = mapper.mapEntityToDto(updatedOrNewClient);
+            log.info("saveOrUpdatePackage(), return value = {}", clientResponseDto);
+            return clientResponseDto;
+
+        } catch (DataAccessException e){
+            log.error("saveOrUpdatePackage(), ошибка сохронения в базу");
+            throw new PersistenceException("В ходе обработки запроса произошла ошибка: " + e.getMessage());
+        }
+
     }
 
     @Override

@@ -7,9 +7,11 @@ import com.example.logistics.model.Office;
 import com.example.logistics.mappers.OfficeMapper;
 import com.example.logistics.repository.OfficeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,14 +35,19 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public OfficeResponseDto saveOrUpdateOffice(OfficeRequestDto dto) {
-        Office updatedOrSaveOffice = Optional.ofNullable(dto.getId())
-                .map(officeId -> officeRepository.findById(officeId)
-                        .map(client -> mapper.updateEntityFromDto(dto, client))
-                        .orElseThrow(() -> new EntityNotFoundException("Не существует в базе клиента с id = " + dto.getId())))
-                .orElse(mapper.mapDtoToEntity(dto));
-        updatedOrSaveOffice = officeRepository.save(updatedOrSaveOffice);
+        try {
+            Office updatedOrSaveOffice = Optional.ofNullable(dto.getId())
+                    .map(officeId -> officeRepository.findById(officeId)
+                            .map(client -> mapper.updateEntityFromDto(dto, client))
+                            .orElseThrow(() -> new EntityNotFoundException("Не существует в базе клиента с id = " + dto.getId())))
+                    .orElse(mapper.mapDtoToEntity(dto));
+            updatedOrSaveOffice = officeRepository.save(updatedOrSaveOffice);
 
-        return mapper.mapEntityToDto(updatedOrSaveOffice);
+            return mapper.mapEntityToDto(updatedOrSaveOffice);
+        } catch (DataAccessException e){
+            throw new PersistenceException("В ходе обработки запроса произошла ошибка: " + e.getMessage());
+        }
+
     }
 
     @Override
