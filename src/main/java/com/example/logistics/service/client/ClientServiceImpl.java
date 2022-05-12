@@ -25,12 +25,17 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientResponseDto> findAll() {
+        log.info("findAll()");
         return clientRepository.findAll().stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 
     @Override
     public ClientResponseDto findClient(Long id) {
+        log.info("findClient(), id = {}", id);
+
         Optional<Client> optionalClient = clientRepository.findById(id);
+        log.info("findClient(), подгрузили из бызы клиента, optionalClient = {}", optionalClient);
+
         return optionalClient.map(mapper::mapEntityToDto).orElse(null);
     }
 
@@ -60,6 +65,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteClient(Long id) {
+        log.info("daleteClient(), id = {}", id);
         clientRepository.deleteById(id);
     }
 

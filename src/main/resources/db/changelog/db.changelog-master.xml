@@ -3,7 +3,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <changeSet id="db-init" author="Kseniya Gurova">
         <tagDatabase tag="db-init"/>
@@ -12,9 +12,12 @@
     <include file="db/changelog/2022/05/09-01-changelog.xml"/>
 
 
+
     <changeSet id="db-v-1.0" author="Kseniya Gurova">
         <tagDatabase tag="db-v-1.0"/>
     </changeSet>
+
+    <include file="db/changelog/2022/05/12-01-changelog.xml"/>
 
 </databaseChangeLog>
 

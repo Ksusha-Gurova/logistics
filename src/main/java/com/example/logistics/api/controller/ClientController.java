@@ -20,11 +20,13 @@ public class ClientController {
 
     @GetMapping
     public List<ClientResponseDto> findAllClients(){
+        log.info("findAllClients()");
         return clientService.findAll();
     }
 
     @GetMapping("/{id}")
     public ClientResponseDto findClient(@PathVariable Long id){
+        log.info("findClient(), id = {}", id);
         return clientService.findClient(id);
     }
 
@@ -36,6 +38,7 @@ public class ClientController {
 
     @DeleteMapping("/{id}")
     public void deleteClient (@PathVariable Long id) {
+        log.info("deleteClient(), il = {}", id);
         clientService.deleteClient(id);
     }
 }
