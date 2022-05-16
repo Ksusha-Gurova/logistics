@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "office")
 public class Office {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String address;
     private String phone;

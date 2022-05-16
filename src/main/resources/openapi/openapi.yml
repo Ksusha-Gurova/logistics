@@ -1,0 +1,256 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Logistics
+servers:
+  - url: localhost:8080
+paths:
+  /client:
+    get:
+      tags:
+        - "client"
+      summary: "Вернет список всех клиентов"
+      description: ""
+      operationId: "findAllClients"
+      responses:
+        "200":
+          description: "Успешный вызов"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClientResponseDto"
+    post:
+      tags:
+        - "client"
+      summary: "Создаст новую запись или обновит имеющуюся"
+      description: ""
+      operationId: "saveOrUpdateClient"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientRequestDto"
+      responses:
+        "200":
+          description: "Успешный вызов"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientResponseDto"
+  /client/{id}:
+    get:
+      tags:
+        - "client"
+      summary: "Вернет клиента по id"
+      description: ""
+      operationId: "findClients"
+      parameters:
+        - name: id
+          in: path
+          description: Client id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Успешный вызов"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientResponseDto"
+    delete:
+      tags:
+        - "client"
+      summary: "Удалит клиента по id"
+      description: ""
+      operationId: "deleteClient"
+      parameters:
+        - name: id
+          in: path
+          description: Client id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Успешный вызов"
+  /courier:
+    get:
+      tags:
+        - "courier"
+      summary: "Вернет список всех курьеров"
+      description: ""
+      operationId: "findAllCouriers"
+      responses:
+        "200":
+          description: "Успешный вызов"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CourierResponseDto"
+    post:
+      tags:
+        - "courier"
+      summary: "Создаст новую запись или обновит имеющуюся"
+      description: ""
+      operationId: "saveOrUpdateCourier"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CourierRequestDto"
+      responses:
+        "200":
+          description: "Успешный вызов"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourierResponseDto"
+  /courier/{id}:
+    get:
+      tags:
+        - "courier"
+      summary: "Вернет курьера по id"
+      description: ""
+      operationId: "findCourier"
+      parameters:
+        - name: id
+          in: path
+          description: Courier id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Успешный вызов"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourierResponseDto"
+    delete:
+      tags:
+        - "courier"
+      summary: "Удалит курьера по id"
+      description: ""
+      operationId: "deleteCourier"
+      parameters:
+        - name: id
+          in: path
+          description: Courier id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Успешный вызов"
+
+
+components:
+  schemas:
+    ClientResponseDto:
+      type: object
+      required:
+        - id
+        - surname
+        - name
+        - patronymic
+        - phone
+        - address
+        - city
+      properties:
+        id:
+          type: integer
+          format: int64
+        surname:
+          type: string
+        name:
+          type: string
+        patronymic:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+    ClientRequestDto:
+      type: object
+      required:
+        - surname
+        - name
+        - patronymic
+        - phone
+        - address
+        - city
+      properties:
+        id:
+          type: integer
+          format: int64
+        surname:
+          type: string
+        name:
+          type: string
+        patronymic:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+    CourierRequestDto:
+      type: object
+      required:
+        - surname
+        - name
+        - patronymic
+        - phone
+        - city
+      properties:
+        id:
+          type: integer
+          format: int64
+        surname:
+          type: string
+        name:
+          type: string
+        patronymic:
+          type: string
+        phone:
+          type: string
+        city:
+          type: string
+    CourierResponseDto:
+      type: object
+      required:
+        - id
+        - surname
+        - name
+        - patronymic
+        - phone
+        - city
+      properties:
+        id:
+          type: integer
+          format: int64
+        surname:
+          type: string
+        name:
+          type: string
+        patronymic:
+          type: string
+        phone:
+          type: string
+        city:
+          type: string
+

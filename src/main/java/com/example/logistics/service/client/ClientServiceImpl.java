@@ -1,12 +1,12 @@
 package com.example.logistics.service.client;
 
-import com.example.logistics.api.dto.request.ClientRequestDto;
-import com.example.logistics.api.dto.response.ClientResponseDto;
-import com.example.logistics.model.Client;
 import com.example.logistics.mappers.ClientMapper;
+import com.example.logistics.model.Client;
 import com.example.logistics.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openapitools.model.ClientRequestDto;
+import org.openapitools.model.ClientResponseDto;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 

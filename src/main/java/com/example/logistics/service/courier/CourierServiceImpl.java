@@ -1,12 +1,12 @@
 package com.example.logistics.service.courier;
 
-import com.example.logistics.api.dto.request.CourierRequestDto;
-import com.example.logistics.api.dto.response.CourierResponseDto;
-import com.example.logistics.model.Courier;
 import com.example.logistics.mappers.CourierMapper;
+import com.example.logistics.model.Courier;
 import com.example.logistics.repository.CourierRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openapitools.model.CourierRequestDto;
+import org.openapitools.model.CourierResponseDto;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 

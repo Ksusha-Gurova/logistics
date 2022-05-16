@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Table(name = "package")
 public class Package {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)

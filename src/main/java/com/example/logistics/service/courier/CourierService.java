@@ -1,7 +1,7 @@
 package com.example.logistics.service.courier;
 
-import com.example.logistics.api.dto.request.CourierRequestDto;
-import com.example.logistics.api.dto.response.CourierResponseDto;
+import org.openapitools.model.CourierRequestDto;
+import org.openapitools.model.CourierResponseDto;
 
 import java.util.List;
 

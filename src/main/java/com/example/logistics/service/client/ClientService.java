@@ -1,7 +1,7 @@
 package com.example.logistics.service.client;
 
-import com.example.logistics.api.dto.request.ClientRequestDto;
-import com.example.logistics.api.dto.response.ClientResponseDto;
+import org.openapitools.model.ClientRequestDto;
+import org.openapitools.model.ClientResponseDto;
 
 import java.util.List;
 

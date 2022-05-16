@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+
+    <changeSet id="1652546546632-1" author="ksu">
+        <insert tableName="client">
+            <column name="surname" value="Петрова"/>
+            <column name="name" value="Ирина"/>
+            <column name="patronymic" value="Викторовна"/>
+            <column name="phone" value="+79032674567"/>
+            <column name="address" value="улица Энгельса 13 - 73"/>
+            <column name="city" value="MOSCOW"/>
+        </insert>
+        <insert tableName="client">
+            <column name="surname" value="Гурова"/>
+            <column name="name" value="Ксения"/>
+            <column name="patronymic" value="Игоревна"/>
+            <column name="phone" value="+79856721345"/>
+            <column name="address" value="улица Ломоносова 10А - 98"/>
+            <column name="city" value="SAINT_PETERSBURG"/>
+        </insert>
+        <insert tableName="client">
+            <column name="surname" value="Воронин"/>
+            <column name="name" value="Андрей"/>
+            <column name="patronymic" value="Валерьевич"/>
+            <column name="phone" value="+78915433675"/>
+            <column name="address" value="улица Куратова, 7 - 56"/>
+            <column name="city" value="SYKTYVKAR"/>
+        </insert>
+        <insert tableName="office">
+            <column name="address" value="улица Западная 22"/>
+            <column name="phone" value="+70000000001"/>
+            <column name="city" value="SYKTYVKAR"/>
+        </insert>
+        <insert tableName="office">
+            <column name="address" value="улица Крупской 68"/>
+            <column name="phone" value="+70000000002"/>
+            <column name="city" value="MOSCOW"/>
+        </insert>
+        <insert tableName="office">
+            <column name="address" value="Обводный канал 13"/>
+            <column name="phone" value="+70000000003"/>
+            <column name="city" value="SAINT_PETERSBURG"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

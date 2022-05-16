@@ -1,9 +1,10 @@
-
+server:
+  port: ${SERVER_PORT:8080}
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: ksusha
-    password: Sdfghjky1!
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${POSTGRES_USER:ksusha}
+    password: ${POSTGRES_PASSWORD:Sdfghjky1!}
 
   liquibase:
     enabled: true

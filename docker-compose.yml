@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+
+#Logistics SPRING
+  logistics:
+    container_name: logistics-service
+    image: logistics-service:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_PORT=8080
+      - POSTGRES_URL=jdbc:postgresql://logistics-pg:5432/postgres
+      - POSTGRES_USER=ksusha
+      - POSTGRES_PASSWORD=Sdfghjky1!
+
+#DataBase for Logistics
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "ksusha"
+      POSTGRES_PASSWORD: "Sdfghjky1!"
+    ports:
+      - "5432:5432"
+    container_name: logistics-pg
+    restart: unless-stopped
+    volumes:
+      - pg-logistics-data:/var/lib/postgresql/data/
+
+volumes:
+  pg-logistics-data:
