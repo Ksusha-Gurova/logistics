@@ -3,11 +3,11 @@ name: Build
 on:
   pull_request:
     branches:
-      - 'feature/devops'
+      - 'master'
 
   push:
     branches:
-      - 'feature/devops'
+      - 'master'
 
 
 jobs:
