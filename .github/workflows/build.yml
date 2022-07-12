@@ -22,4 +22,4 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Maven Package
-        run: mvn -B clean package -DskipTestsTOKEN }}
+        run: mvn -B clean package -DskipTests
